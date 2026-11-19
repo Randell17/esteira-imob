@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Esteira IMOB</title>
+<style>
+:root{--bg:#f4efe6;--card:#fffdf8;--ink:#1d2a24;--mut:#6b756f;--g:#0b6b4a;--g2:#e1f0e8;--a:#d98a1c;--r:#b4372b;--line:#e2dccd;--me:#d8f3dc;--box:box-sizing;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121815;--card:#1a221e;--ink:#e8efe9;--mut:#93a09a;--g:#4fc08d;--g2:#1f3329;--a:#f0a940;--r:#ef7a6c;--line:#2b3631;--me:#1f4a38}}
+:root[data-theme="dark"]{--bg:#121815;--card:#1a221e;--ink:#e8efe9;--mut:#93a09a;--g:#4fc08d;--g2:#1f3329;--a:#f0a940;--r:#ef7a6c;--line:#2b3631;--me:#1f4a38}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI",system-ui,sans-serif}
+header{padding:18px 20px 6px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h1{font:700 26px Georgia,serif;margin:0;letter-spacing:-.5px}h1 b{color:var(--g)}
+header p{margin:0;color:var(--mut)}
+main{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;padding:12px 20px 28px;max-width:1150px;margin:auto}
+@media(max-width:820px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ph{display:flex;flex-direction:column;height:640px}
+.top{background:var(--g);color:#fff;padding:10px 14px;display:flex;gap:10px;align-items:center}
+.top i{width:34px;height:34px;border-radius:50%;background:#ffffff33;display:grid;place-items:center;font-style:normal}
+.top small{display:block;opacity:.8;font-size:12px}
+#msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--g2)}
+.m{max-width:82%;padding:8px 11px;border-radius:12px;background:var(--card);align-self:flex-start;white-space:pre-wrap;border:1px solid var(--line)}
+.m.me{align-self:flex-end;background:var(--me)}.m.err{border-color:var(--r)}.m.ok{border-color:var(--g)}
+.m img{max-width:100%;border-radius:8px;display:block;margin-bottom:4px}
+.m small{display:block;color:var(--mut);font-size:11px;margin-top:3px}
+.in{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line)}
+.in input[type=text]{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:20px;background:var(--bg);color:var(--ink);font:inherit}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 12px}
+button.p{background:var(--g);color:#fff;border-color:var(--g)}button:disabled{opacity:.5;cursor:default}
+.tests{padding:8px 10px;border-top:1px dashed var(--line);font-size:12px;color:var(--mut)}
+.tests button{font-size:12px;padding:4px 9px;margin:3px 3px 0 0}
+.pn{padding:16px;display:flex;flex-direction:column;gap:14px}
+.pn h2{font:700 17px Georgia,serif;margin:0}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{background:var(--g2);border-radius:10px;padding:10px}.k b{font:700 22px Georgia,serif;display:block}.k span{font-size:12px;color:var(--mut)}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;background:var(--line)}
+.Quente{background:#f9d7d2;color:#8a2217}.Morna{background:#fbe8c4;color:#7a4a05}.Fria{background:#d6e6f5;color:#1f4a75}
+.row{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);align-items:center}
+.row:last-child{border:0}.st{font-size:13px}.st.ok{color:var(--g)}.st.no{color:var(--r)}.st.w{color:var(--mut)}
+.mut{color:var(--mut);font-size:13px}ul{margin:4px 0;padding-left:18px}
+.tl{border-left:2px solid var(--a);padding-left:12px;margin:6px 0}
+[hidden]{display:none!important}label{display:block;font-size:12px;color:var(--mut)}label input,label textarea{display:block;width:100%;margin-top:3px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}@media(max-width:520px){.g2{grid-template-columns:1fr}}img.th{width:70px;height:52px;object-fit:cover;border-radius:8px}.m img{width:100%}</style></head>
+<body>
+<header><h1>Esteira <b>IMOB</b></h1><p>Do WhatsApp ao dossiê pronto, sem o corretor correr atrás de documento.</p><div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"><button id="nv">Nova conversa</button><button id="tg">⚙ Corretor e catálogo</button></div></header>
+<details style="max-width:1150px;margin:4px auto 0;padding:0 20px"><summary style="cursor:pointer;color:var(--g);font-weight:600">Como testar em 3 minutos</summary><ol class="mut" style="margin:6px 0 0"><li>Aceite o consentimento e responda às perguntas da agente (ou tente fugir do assunto).</li><li>Peça um imóvel, por exemplo “tem algo perto do RioMar?”. Ela descreve primeiro e oferece a foto.</li><li>Quando ela pedir documentos, use os botões de teste: “CNH vencida”, “RG borrado” e “RG cortado” são recusados; “Doc. pedido ✓” é aprovado.</li><li>No painel, veja o dossiê, baixe os arquivos e clique em “Simular aprovação” ou “Simular reprovação”.</li><li>Em “Corretor e catálogo”, mude o nome do agente e cadastre imóveis. Use “Nova conversa” para aplicar. Todos os documentos são fictícios.</li></ol></details>
+<main>
+<section class="card ph">
+ <div class="top"><i>🏠</i><div><b id="hn"></b><small id="hs"></small></div></div>
+ <div id="msgs"></div>
+ <div class="tests"><b>Documentos de teste (fictícios):</b><br><span id="tb"></span></div>
+ <div class="in"><input type="text" id="t" placeholder="Digite sua resposta…"><button id="sd" class="p">Enviar</button>
+ <button id="ph" title="Enviar foto">📎</button><input type="file" id="f" accept="image/*" hidden></div>
+</section>
+<section class="card pn" id="pn"></section>
+<section class="card pn" id="cat" hidden></section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const TODAY="15/11/2026";
+let CFG={agent:"Marina",corretor:"Marina Duarte",creci:"CRECI-PE 12345"},CAT=[];
+function art(i){const c=document.createElement("canvas");c.width=640;c.height=420;const x=c.getContext("2d"),P=[["#9fd3f0","#f6e7c1"],["#f4c98b","#d8e8c9"],["#8fc7e8","#f2d9b0"],["#b9d7a8","#f3e3c3"]][i%4],g=x.createLinearGradient(0,0,0,420);g.addColorStop(0,P[0]);g.addColorStop(1,P[1]);x.fillStyle=g;x.fillRect(0,0,640,420);x.fillStyle="#2f7f6b";x.fillRect(0,360,640,60);
+ const cols=["#d9d2c3","#c7b9a0","#e8e1d3","#b8a88f"];for(let k=0;k<4;k++){const w=90+((k*37+i*23)%50),h=140+((k*61+i*47)%140),px=40+k*145;x.fillStyle=cols[(k+i)%4];x.fillRect(px,360-h,w,h);x.fillStyle="#fff9";for(let r=0;r<h/30-1;r++)for(let q=0;q<w/28;q++)x.fillRect(px+8+q*24,360-h+10+r*30,14,18)}
+ x.fillStyle="#fff";x.font="14px sans-serif";x.fillText("ilustração · dados fictícios",12,408);return c.toDataURL("image/jpeg",.7)}
+const SEED=[["Apartamento 2 quartos em Boa Viagem","R$ 480.000","Boa Viagem","A 5 min da praia e do Shopping Recife",2,"Varanda com vista parcial para o mar, 1 vaga, condomínio com piscina e portaria 24h."],["Casa 3 quartos nas Graças","R$ 890.000","Graças","Perto do Parque da Jaqueira e do Rio Capibaribe",3,"Casa com quintal, suíte, 2 vagas, rua tranquila e arborizada."],["Apartamento 1 quarto no Pina","R$ 310.000","Pina","Perto da Praia do Pina e do RioMar Shopping",1,"Compacto moderno, mobiliado, ótimo para primeiro imóvel ou investimento, 1 vaga."],["Apartamento 3 quartos em Casa Forte","R$ 650.000","Casa Forte","Perto da Praça de Casa Forte e do Parque Santana",3,"Suíte master, varanda gourmet, 2 vagas, lazer completo, andar alto."]];
+const seed=()=>SEED.map((s,i)=>({id:"p"+(i+1),titulo:s[0],preco:s[1],bairro:s[2],ref:s[3],quartos:s[4],desc:s[5],foto:art(i)}));
+try{const j=JSON.parse(localStorage.getItem("esteira_v1")||"null");if(j&&j.cat&&j.cat.length){CFG=j.cfg;CAT=j.cat}}catch(e){}
+if(!CAT.length)CAT=seed();
+const save=()=>{try{localStorage.setItem("esteira_v1",JSON.stringify({cfg:CFG,cat:CAT}))}catch(e){}};
+
+const QS=["Qual é o seu nome completo?","Qual é a renda familiar mensal, somando quem vai comprar junto?","Você tem FGTS com 3 anos ou mais de carteira? Qual o saldo aproximado?","Tem alguma restrição no seu nome (SPC/Serasa)?","Quanto você tem disponível para a entrada?"];
+let DOCS=[{k:"RG",n:"RG ou CNH",ok:["RG","CNH"]},{k:"Renda",n:"comprovante de renda",ok:["Renda"]},{k:"Residencia",n:"comprovante de residência (últimos 90 dias)",ok:["Residencia"]}];
+let S={step:"consent",q:0,ans:[],name:"",docs:{},times:[],tries:0,sum:null,rep:null,busy:false};
+const slug=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").split(/\s+/).filter(Boolean).map(w=>w[0].toUpperCase()+w.slice(1).toLowerCase()).join("");
+function add(who,txt,img,cls){const d=document.createElement("div");d.className="m "+(who==="me"?"me ":"")+(cls||"");if(img){const i=new Image();i.src=URL.createObjectURL(img);d.appendChild(i)}if(txt){const s=document.createElement("span");s.textContent=txt;d.appendChild(s)}$("#msgs").appendChild(d);$("#msgs").scrollTop=1e9;return d}
+async function bot(txt,cls,delay){const t=add("bot","digitando…");t.style.opacity=.6;await new Promise(r=>setTimeout(r,delay||500));t.remove();return add("bot",txt,null,cls)}
+async function ai(prompt,imgs){const s=await claude.use("sample");if(!s)throw new Error("IA indisponível");return s.json(prompt,imgs?{images:imgs,cache:false}:{cache:false})}
+function shrink(f){return new Promise(res=>{const i=new Image();i.onload=()=>{const k=Math.min(1,1100/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;c.getContext("2d").drawImage(i,0,0,c.width,c.height);c.toBlob(res,"image/jpeg",.85)};i.src=URL.createObjectURL(f)})}
+S.p={};S.di=0;S.hist=[];S.consent=null;
+const F=["nome","renda","ocupacao","estadocivil","fgts","restricao","entrada"];
+const F2={ocupacao:"ocupação (CLT, autônomo, servidor, empresário)",estadocivil:"estado civil (e se compra com cônjuge)",nome:"nome completo",renda:"renda familiar mensal",fgts:"FGTS (3+ anos de carteira e saldo)",restricao:"restrição no nome (SPC/Serasa)",entrada:"valor disponível para entrada"};
+const pend=()=>F.filter(k=>!S.p[k]);
+const stage=()=>S.consent!==true?"consent":pend().length?"q":S.di<DOCS.length?"docs":"done";
+const SYS=()=>`Você é ${CFG.agent}, assistente virtual de ${CFG.corretor} (${CFG.creci}), corretor(a) de imóveis, conversando por WhatsApp com um cliente interessado em comprar imóvel e financiar. Se perguntarem, admite com naturalidade que é assistente virtual. Tom: humano, curto (máx. 3 frases), informal, sem "Olá!" robótico, sem listas. Objetivo: (1) obter consentimento para tratar os dados; (2) coletar nome completo, renda familiar mensal, ocupação, estado civil (e se compra com cônjuge), FGTS (3+ anos e saldo), restrição no nome e valor de entrada; (3) pedir documentos um por vez: RG ou CNH, comprovante de renda, comprovante de residência (últimos 90 dias). Privacidade: arquivos vistos só pela corretora e pela análise de crédito, guardados até 30 dias. O cliente pode perguntar qualquer coisa, inclusive fora de contexto (juros, prazo, segurança, se você é robô, assuntos aleatórios, ofensas, mensagens sem sentido). Responda de verdade ao que foi perguntado, com honestidade e brevidade; nunca invente taxas, valores, prazos ou aprovação (diga que depende do banco e da análise); se não souber, diga. Assunto sem relação: responda com leveza em uma frase e retome gentilmente o ponto pendente. Se o cliente recusar o consentimento, respeite. Nunca peça senha, token ou dados bancários. Você é uma corretora experiente e conhece o processo de compra e financiamento de imóveis no Brasil: etapas (simulação, pré-análise, escolha do imóvel, avaliação, assinatura, registro em cartório), diferença entre programas habitacionais e financiamento comum, uso do FGTS, entrada, ITBI e custos de cartório, tipos de comprovação de renda (CLT, autônomo, servidor, empresário), composição de renda e como limpar o nome. Explique com clareza e exemplos simples, como uma pessoa de confiança, sem jargão. Taxas, limites, faixas de renda e regras mudam com frequência: fale em termos gerais, diga que os valores exatos dependem do banco e da regra vigente e que você confirma na análise. Se o cliente estiver inseguro, com medo ou sem entender, acolha e explique antes de pedir qualquer dado. Você pode conversar normalmente sobre o assunto dele (sonho da casa própria, dúvidas, comparação aluguel e compra) sem ficar forçando perguntas.`;
+async function agent(user,ev){
+ const got=Object.keys(S.docs).map(k=>DOCS.find(d=>d.k===k).n);
+ const ctx=`Hoje: ${TODAY}. Consentimento: ${S.consent===null?"ainda não respondido":S.consent}. Dados coletados: ${JSON.stringify(S.p)}. Dados que faltam: ${pend().map(k=>F2[k]).join(", ")||"nenhum"}. Documentos recebidos: ${got.join(", ")||"nenhum"}. Próximo documento a pedir: ${S.di<DOCS.length?DOCS[S.di].n:"nenhum (tudo recebido)"}. Catálogo do corretor (único conjunto de imóveis que você pode citar): ${JSON.stringify(CAT.map(({id,titulo,preco,bairro,ref,quartos,desc})=>({id,titulo,preco,bairro,ref,quartos,desc})))}. Imóveis já apresentados em texto: ${JSON.stringify(S.shown||[])}. Fotos já enviadas: ${JSON.stringify(S.sent||[])}.`;
+ const h=S.hist.slice(-14).map(x=>(x.r==="u"?"Cliente: ":"Marina: ")+x.t).join("\n");
+ return ai(`${SYS()}\n\n${ctx}\n\nConversa até aqui:\n${h||"(início)"}\n\n${ev?"Evento: "+ev:'Nova mensagem do cliente: "'+user+'"'}\n\nResponda só JSON: {"mensagem":"sua resposta","consentimento":true|false|null,"nome":null,"renda":null,"ocupacao":null,"estadocivil":null,"fgts":null,"restricao":null,"entrada":null,"imoveis":[],"fotos":[]}. Catálogo: fale só dos imóveis cadastrados; nunca invente imóvel, preço ou endereço; se nenhum servir, diga que vai avisar o corretor se surgir algo. Ao apresentar um imóvel, descreva-o só em texto (preço, bairro, pontos de referência, quartos, destaques) e pergunte se o cliente quer receber a foto; NÃO envie a foto ainda. Coloque em "imoveis" os ids que você apresentou em texto. Só coloque ids em "fotos" (máx. 2) quando o cliente disser que quer ver a foto daquele imóvel, respondendo à sua pergunta ou por pedido direto. Nunca reenvie uma foto já enviada e não repita a pergunta da foto a cada vez que citar o imóvel: pergunte uma vez por imóvel. Sugira imóveis quando o cliente pedir ou quando renda e entrada indicarem, sem prometer aprovação do financiamento. Preencha um campo só se o cliente informou claramente nesta mensagem (curto, como ele disse); senão null. consentimento: true se aceitou, false se recusou, null se não tratou disso. Fluxo: sem consentimento, peça-o; com consentimento, primeiro responda de verdade ao que o cliente disse ou perguntou, e só então, se fizer sentido, peça UM dado que falta, de forma natural e sem soar como formulário (se ele puxar outro assunto, siga com ele um pouco e retome depois); se com esta mensagem os dados ficarem completos, agradeça e peça o próximo documento; se tudo estiver recebido, fique à disposição e diga que avisa quando houver retorno.`)}
+async function apply(r){if(typeof r.consentimento==="boolean")S.consent=r.consentimento;const was=pend().length;F.forEach(k=>{const v=r[k];if(v&&String(v).trim()&&String(v)!=="null")S.p[k]=String(v).trim()});if(S.p.nome)S.name=S.p.nome;if(was&&!pend().length)await summ()}
+async function summ(){try{S.sum=await ai(`Você apoia um corretor de imóveis. Respostas de um cliente à pré-qualificação de financiamento imobiliário: ${JSON.stringify(S.p)}. Responda só JSON: {"temperatura":"Quente|Morna|Fria","resumo":"2 frases para o corretor sobre o potencial real do cliente","alertas":["até 3 pontos de atenção curtos"],"proximo":"melhor próxima ação do corretor, 1 frase","documentos":[{"k":"id curto sem espaços nem acentos","n":"nome do documento"}]}. Em documentos liste de 4 a 7 documentos que um corretor realmente pede para ESTE perfil, sem incluir RG/CNH (será o primeiro): CPF se necessário, certidão de estado civil, comprovante de residência, comprovante de renda adequado à ocupação (holerites, IRPF, extratos, DECORE), extrato do FGTS se for usar, carteira de trabalho, documentos do cônjuge se compra junto.`);const L=(S.sum&&S.sum.documentos)||[];if(L.length>=3)DOCS=[{k:"RG",n:"RG ou CNH",ok:["RG","CNH"]}].concat(L.slice(0,7).map(x=>({k:String(x.k).replace(/[^A-Za-z0-9]/g,"")||"Doc",n:x.n})))}catch(e){}render()}
+async function say(r){S.hist.push({r:"m",t:r.mensagem});await bot(r.mensagem,null,200);for(const id of r.imoveis||[]){S.shown=S.shown||[];if(CAT.some(x=>x.id===id)&&!S.shown.includes(id))S.shown.push(id)}for(const id of (r.fotos||[]).slice(0,2)){const p=CAT.find(x=>x.id===id);S.sent=S.sent||[];if(p&&!S.sent.includes(id)){card(p);S.sent.push(id)}}}
+async function start(){S.busy=true;try{const r=await agent("","início: o cliente acabou de chamar. Apresente-se e peça o consentimento.");await say(r)}catch(e){await bot(`Oi! Sou ${CFG.agent}, assistente de ${CFG.corretor}. Posso te ajudar por aqui?`)}S.busy=false;render()}
+async function send(txt,file){if(S.busy)return;txt=(txt||"").trim();if(!txt&&!file)return;S.busy=true;$("#t").value="";
+ try{if(file){const b=await shrink(file);add("me",null,b);await doc(b)}else{add("me",txt);await text(txt)}}catch(e){await bot("Desculpa, travei aqui. Pode repetir?","err")}
+ S.busy=false;render()}
+async function text(t){S.hist.push({r:"u",t});let r;try{r=await agent(t)}catch(e){await bot("Tive um problema de conexão aqui. Pode mandar de novo?","err");return}await apply(r);await say(r)}
+async function doc(b){
+ if(stage()!=="docs"){S.hist.push({r:"u",t:"[enviou uma foto]"});try{const r=await agent("","o cliente enviou uma foto, mas ainda não é a hora de receber documento (faltam consentimento ou dados). Não analise a imagem; responda com naturalidade e retome o ponto pendente.");await apply(r);await say(r)}catch(e){}return}
+ const d=DOCS[S.di],nx=DOCS[S.di+1],t0=performance.now();
+ const w=add("bot","analisando o documento…");w.style.opacity=.6;
+ let r;try{r=await ai(`Você é ${CFG.agent}, assistente de ${CFG.corretor}, validando documentos para financiamento imobiliário por WhatsApp. Hoje é ${TODAY}. Documento esperado: ${d.n}. Nome do cliente: "${S.name}". Analise a imagem e responda só JSON: {"tipo":"nome curto do documento detectado","qualidade":"ok|cortada|borrada|escura","vencido":true|false,"nome":"nome lido no documento ou vazio","nomeConfere":true|false,"aprovado":true|false,"mensagem":"resposta em português informal, até 2 frases, humana, sem 'Olá!'. Se reprovado: diga exatamente o problema e o que você enxergou na imagem (ex.: a CNH venceu em março; recebi um CPF e preciso do comprovante de renda) e peça novo envio. Se aprovado: confirme curto e ${nx?"peça em seguida: "+nx.n:"diga que o dossiê está completo e que você avisa quando houver retorno"}"}. Regras: aprovado só se o tipo for o esperado (RG ou CNH vale para identidade), qualidade ok, não vencido (documento com validade passada reprova; comprovantes de residência e de renda com mais de 90 dias reprovam) e nome compatível (aceite abreviações e diferenças de acento). Os documentos desta demonstração são fictícios e trazem o aviso 'DOCUMENTO FICTÍCIO': trate-os como reais e NUNCA reprove por causa desse aviso. Eles são simplificados e não têm todos os campos oficiais: aprove quando o título e o conteúdo indicarem claramente que é o documento esperado e a qualidade estiver boa. Mas não aceite um documento de outro tipo (ex.: um CPF no lugar de um comprovante de renda).`,[b])}
+ catch(e){w.remove();await bot("Tive um problema para ler essa imagem. Tenta enviar de novo?","err");return}
+ w.remove();S.times.push((performance.now()-t0)/1000);
+ S.hist.push({r:"u",t:`[enviou foto: ${r.tipo}, ${r.aprovado?"aprovada":"reprovada ("+r.qualidade+(r.vencido?", vencido":"")+")"}]`});
+ if(r.aprovado){S.docs[d.k]={blob:b,file:`0${S.di+1}_${d.k}_${slug(S.name)}.jpg`,tipo:r.tipo};S.di++;S.tries=0;S.hist.push({r:"m",t:r.mensagem});await bot(r.mensagem,"ok",200)}
+ else{S.tries++;S.hist.push({r:"m",t:r.mensagem});await bot(r.mensagem,"err",200)}}
+function render(){
+ const el=$("#pn"),sm=S.sum,got=Object.keys(S.docs).length,avg=S.times.length?(S.times.reduce((a,b)=>a+b)/S.times.length).toFixed(1):"—";
+ let h=`<h2>Painel do corretor</h2><div class="kpis"><div class="k"><b>${avg}${avg==="—"?"":" s"}</b><span>feedback por documento (hoje: ~1 dia)</span></div><div class="k"><b>${got}/${DOCS.length}</b><span>documentos válidos</span></div><div class="k"><b>${S.tries}</b><span>reenvios pedidos</span></div></div>`;
+ if(!S.name){h+=`<p class="mut">Nenhum lead ainda. Converse com a Marina ao lado para ver a esteira funcionando.</p>`;el.innerHTML=h;return}
+ h+=`<div><b>${esc(S.name)}</b> ${sm?`<span class="tag ${esc(sm.temperatura)}">${esc(sm.temperatura)}</span>`:""}</div>`;
+ if((S.p.renda||S.p.fgts))h+=`<div class="mut">Renda: ${esc(S.p.renda||"…")} · FGTS: ${esc(S.p.fgts||"…")} · Restrição: ${esc(S.p.restricao||"…")} · Entrada: ${esc(S.p.entrada||"…")}</div>`;
+ if(sm)h+=`<div>${esc(sm.resumo)}<ul>${(sm.alertas||[]).map(a=>`<li>${esc(a)}</li>`).join("")}</ul><div class="mut"><b>Próxima ação:</b> ${esc(sm.proximo)}</div></div>`;
+ if(S.shown&&S.shown.length)h+=`<div class="mut"><b>Imóveis apresentados:</b> ${S.shown.map(id=>esc((CAT.find(x=>x.id===id)||{}).titulo)).join(" · ")}</div>`;h+=`<h2>Dossiê</h2>`+DOCS.map(d=>{const x=S.docs[d.k];return`<div class="row"><span>${d.n}</span><span class="st ${x?"ok":"w"}">${x?"✓ "+x.file:"aguardando"}</span></div>`}).join("");
+ h+=`<div><button class="p" id="dl" ${got?"":"disabled"}>Baixar dossiê (${got} arquivos)</button> <button id="ap" ${stage()==="done"?"":"disabled"}>Simular aprovação</button> <button id="rp" ${stage()==="done"?"":"disabled"}>Simular reprovação</button></div>`;
+ if(S.apr)h+=`<h2>Pré-aprovada · próximos passos</h2><div class="mut"><ol>${S.apr.passos.map(p=>`<li>${esc(p)}</li>`).join("")}</ol></div>`;if(S.rep)h+=`<h2>Pós-reprovação · modo relacionamento</h2><div class="mut">Passos para aprovar no futuro:<ul>${S.rep.passos.map(p=>`<li>${esc(p)}</li>`).join("")}</ul></div>`+S.rep.agenda.map(a=>`<div class="tl"><b>Dia ${esc(a.dia)}</b> · ${esc(a.texto)}</div>`).join("");
+ el.innerHTML=h;
+ $("#dl")&&($("#dl").onclick=dl);$("#rp")&&($("#rp").onclick=repro);$("#ap")&&($("#ap").onclick=aprov)}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function dl(){const d=await claude.use("downloads");if(!d){alert("Download indisponível nesta visualização.");return}
+ for(const x of Object.values(S.docs)){try{await d.save({filename:x.file,data:x.blob})}catch(e){break}}}
+async function repro(){S.apr=null;$("#rp").disabled=true;$("#rp").textContent="gerando…";
+ try{S.rep=await ai(`A pré-análise de financiamento do cliente "${S.name}" foi reprovada. Dados: ${JSON.stringify(S.p)}. Responda só JSON: {"mensagem":"mensagem de WhatsApp da assistente ${CFG.agent}, empática, humana, até 4 frases, sem prometer aprovação, explicando o que dá para fazer","passos":["3 passos concretos para aprovar no futuro, baseados nos dados"],"agenda":[{"dia":30,"texto":"o que a corretora envia aos 30 dias"},{"dia":60,"texto":"o que envia aos 60 dias"}]}`);
+  S.hist.push({r:"m",t:S.rep.mensagem});await bot(S.rep.mensagem)}catch(e){await bot("Não consegui gerar agora.","err")}render()}
+async function aprov(){$("#ap").disabled=true;$("#ap").textContent="gerando…";S.rep=null;
+ try{S.apr=await ai(`A pré-análise de financiamento do cliente "${S.name}" foi aprovada. Dados: ${JSON.stringify(S.p)}. Responda só JSON: {"mensagem":"mensagem de WhatsApp da assistente ${CFG.agent}, calorosa, humana, até 3 frases, sem prometer prazo nem valor exato, explicando que é pré-aprovação sujeita à avaliação do imóvel","passos":["4 próximos passos reais do financiamento imobiliário, em ordem, curtos"]}`);S.hist.push({r:"m",t:S.apr.mensagem});await bot(S.apr.mensagem,"ok")}catch(e){await bot("Não consegui gerar agora.","err")}render()}
+const DEF=DOCS.slice();
+function head(){$("#hn").textContent=CFG.corretor+" · "+CFG.agent;$("#hs").textContent=CFG.creci+" · Esteira IMOB (simulado)"}
+function card(p){const d=document.createElement("div");d.className="m";const i=new Image();i.src=p.foto;d.appendChild(i);const b=document.createElement("b");b.textContent=p.titulo+" · "+p.preco;d.appendChild(b);const s=document.createElement("small");s.textContent=p.bairro+" · "+p.ref;d.appendChild(s);$("#msgs").appendChild(d);$("#msgs").scrollTop=1e9}
+function shrinkURL(f){return new Promise(res=>{const i=new Image();i.onload=()=>{const k=Math.min(1,640/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;c.getContext("2d").drawImage(i,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",.7))};i.src=URL.createObjectURL(f)})}
+function renderCat(){$("#cat").innerHTML=`<h2>Perfil do corretor</h2><div class="g2"><label>Nome do agente<input data-c="agent" value="${esc(CFG.agent)}"></label><label>Nome do corretor<input data-c="corretor" value="${esc(CFG.corretor)}"></label><label>CRECI<input data-c="creci" value="${esc(CFG.creci)}"></label></div><p class="mut">Valem para a próxima conversa (botão “Nova conversa”). Salvo só neste navegador; cada pessoa que abrir vê o seu catálogo.</p><h2>Meus imóveis (${CAT.length})</h2>`+CAT.map(p=>`<div class="row"><span style="display:flex;gap:10px;align-items:center"><img class="th" src="${p.foto}"><span><b>${esc(p.titulo)}</b><br><span class="mut">${esc(p.preco)} · ${esc(p.bairro)}</span></span></span><button data-del="${p.id}">Remover</button></div>`).join("")+`<h2>Adicionar imóvel</h2><div class="g2"><label>Título<input id="n_t"></label><label>Preço<input id="n_p" placeholder="R$ 400.000"></label><label>Bairro<input id="n_b"></label><label>Pontos de referência<input id="n_r"></label><label>Quartos<input id="n_q" type="number"></label><label>Foto (opcional)<input id="n_f" type="file" accept="image/*"></label></div><label>Descrição<textarea id="n_d" rows="2"></textarea></label><div><button class="p" id="n_add">Adicionar imóvel</button></div>`}
+$("#cat").oninput=e=>{const k=e.target.dataset.c;if(k){CFG[k]=e.target.value;save();head()}};
+$("#cat").onclick=async e=>{const t=e.target;if(t.dataset.del){CAT=CAT.filter(p=>p.id!==t.dataset.del);save();renderCat()}
+ if(t.id==="n_add"){const v=i=>$("#"+i).value.trim();if(!v("n_t")||!v("n_p"))return;const f=$("#n_f").files[0];const foto=f?await shrinkURL(f):art(CAT.length);
+  CAT.push({id:"p"+Date.now(),titulo:v("n_t"),preco:v("n_p"),bairro:v("n_b"),ref:v("n_r"),quartos:+v("n_q")||0,desc:v("n_d"),foto});save();renderCat()}};
+$("#tg").onclick=()=>{const c=$("#cat").hidden;$("#cat").hidden=!c;$("#pn").hidden=c;$("#tg").textContent=c?"← Voltar ao painel":"⚙ Corretor e catálogo";if(c)renderCat()};
+$("#nv").onclick=()=>{S={step:"consent",q:0,ans:[],name:"",docs:{},times:[],tries:0,sum:null,rep:null,apr:null,shown:[],busy:false,p:{},di:0,hist:[],consent:null};DOCS=DEF.slice();$("#msgs").innerHTML="";head();start();render()};
+/* documentos de teste desenhados em canvas */
+const T=[["Doc. pedido ✓","","João Silva","Emitido em 05/11/2026"],["RG ✓","RG","João Silva","—"],["CNH vencida","CNH","João Silva","Validade 12/03/2026"],["CNH válida","CNH","João Silva","Validade 20/08/2031"],["RG borrado","RG","João Silva","—","blur"],["RG cortado","RG","João Silva","—","crop"],["Holerite","Renda","João Silva","Salário líquido R$ 4.850,00"],["Conta de luz","Residencia","João Silva","Venc. 10/10/2026 · Recife-PE"]];
+function fake([_,k,n0,e,fx]){const n=S.name||n0;const c=document.createElement("canvas");c.width=760;c.height=480;const x=c.getContext("2d");x.fillStyle="#bfb8a8";x.fillRect(0,0,760,480);
+ const ox=fx==="crop"?-260:60;x.save();x.translate(ox,50);x.rotate(.015);x.fillStyle="#f7f4ea";x.fillRect(0,0,640,380);x.fillStyle="#0b6b4a";x.fillRect(0,0,640,56);x.fillStyle="#fff";x.font="bold 20px sans-serif";
+ x.fillText(({RG:"REPÚBLICA FEDERATIVA DO BRASIL · RG",CNH:"CARTEIRA NACIONAL DE HABILITAÇÃO",Renda:"HOLERITE · EMPRESA EXEMPLO LTDA",Residencia:"FATURA DE ENERGIA · NEOENERGIA"})[k]||"",20,36);if(!({RG:1,CNH:1,Renda:1,Residencia:1})[k]){const w=(DOCS[S.di]?DOCS[S.di].n.toUpperCase():"DOCUMENTO").split(" ");let l1="",l2="";w.forEach(t=>{if(!l2&&(l1+" "+t).length<=42)l1+=" "+t;else l2+=" "+t});x.fillStyle="#0b6b4a";x.fillRect(0,0,640,56);x.fillStyle="#fff";x.font="bold 16px sans-serif";x.fillText(l1.trim(),20,24);x.fillText(l2.trim(),20,46)}x.fillStyle="#222";x.font="22px sans-serif";
+ x.fillStyle="#9aa";x.fillRect(24,86,130,160);x.fillStyle="#222";x.font="22px sans-serif";x.fillText("Nome: "+n,180,120);x.fillText("CPF: 123.456.789-00",180,160);x.fillText(e,180,200);x.fillText("Nº de controle/recibo: 48.21.77.33.09.12",180,240);x.fillText("DOCUMENTO FICTÍCIO PARA DEMONSTRAÇÃO",24,340);x.restore();
+ if(fx==="blur"){const d=document.createElement("canvas");d.width=760;d.height=480;const y=d.getContext("2d");y.filter="blur(7px)";y.drawImage(c,0,0);return d}return c}
+$("#tb").innerHTML=T.map((t,i)=>`<button data-i="${i}">${t[0]}</button>`).join("");
+$("#tb").onclick=e=>{const i=e.target.dataset.i;if(i==null)return;fake(T[i]).toBlob(b=>send("",b),"image/jpeg",.9)};
+$("#sd").onclick=()=>send($("#t").value);$("#t").onkeydown=e=>{if(e.key==="Enter")send($("#t").value)};
+$("#ph").onclick=()=>$("#f").click();$("#f").onchange=e=>{const f=e.target.files[0];e.target.value="";f&&send("",f)};
+head();start();render();
+</script></body></html>
