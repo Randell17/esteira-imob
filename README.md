@@ -2,7 +2,7 @@
 
 Assistente de IA para corretores de imóveis: atende o cliente pelo WhatsApp (simulado), qualifica o lead, apresenta os imóveis do corretor, valida os documentos do financiamento em segundos e entrega o dossiê organizado.
 
-Projeto de autoria de [seu nome], desenvolvido para o Processo Seletivo de Inovação do CITi, novembro de 2026.
+Projeto de autoria de Randell, desenvolvido para o Processo Seletivo de Inovação do CITi, novembro de 2026.
 
 ## O problema
 
@@ -31,7 +31,7 @@ No financiamento imobiliário, o cliente manda a foto do documento e só descobr
 
 O arquivo `esteira-imob.html` chama a IA por um recurso que **só existe dentro do ambiente de artefatos do Claude**. Abrindo o arquivo diretamente no navegador, a página carrega, mas a conversa e a leitura de documentos não funcionam. Para ver o produto rodando:
 
-- assista ao **vídeo da demonstração**: [colar link];
+- assista ao **vídeo da demonstração**:https://youtu.be/AcgGvJJGDoQ?si=Ny67htA9scKHmpQO;
 - ou abra o **link publicado** (requer conta no Claude): https://claude.ai/artifact/GQohDQaNKGn4654hFQHbsK
 
 Para rodar fora do Claude, seria necessário um pequeno servidor que chame a API da Anthropic com uma chave protegida. Isso está no roadmap.
@@ -56,4 +56,4 @@ Para rodar fora do Claude, seria necessário um pequeno servidor que chame a API
 
 ## Documentação
 
-A documentação completa (funcionalidades, funcionamento, tecnologias, uso de IA no desenvolvimento, testes e limitações) acompanha a entrega: [colar link ou anexar o PDF].
+A documentação completa (funcionalidades, funcionamento, tecnologias, uso de IA no desenvolvimento, testes e limitações) acompanha a entrega:https://go.fliplink.me/view/AD3A729C-0588-4060-B0E0-0F1C0C43C78E .
