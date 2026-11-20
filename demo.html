@@ -6,57 +6,76 @@
 :root{--bg:#f4efe6;--card:#fffdf8;--ink:#1d2a24;--mut:#6b756f;--g:#0b6b4a;--g2:#e1f0e8;--r:#b4372b;--line:#e2dccd;--me:#d8f3dc}
 @media(prefers-color-scheme:dark){:root{--bg:#121815;--card:#1a221e;--ink:#e8efe9;--mut:#93a09a;--g:#4fc08d;--g2:#1f3329;--r:#ef7a6c;--line:#2b3631;--me:#1f4a38}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI",system-ui,sans-serif}
-h1{font:700 26px Georgia,serif;margin:0}h1 b{color:var(--g)}
-header{padding:18px 20px 4px;max-width:1150px;margin:auto}
+h1{font:700 26px Georgia,serif;margin:0}h1 b{color:var(--g)}header{padding:18px 20px 4px;max-width:1150px;margin:auto}
 .note{max-width:1110px;margin:8px auto;padding:10px 14px;border:1px solid var(--g);border-radius:10px;background:var(--g2);font-size:13px}
 main{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;padding:8px 20px 28px;max-width:1150px;margin:auto}
 @media(max-width:820px){main{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.ph{display:flex;flex-direction:column;height:620px}
+.ph{display:flex;flex-direction:column;height:640px}
 .top{background:var(--g);color:#fff;padding:10px 14px}.top small{display:block;opacity:.8;font-size:12px}
 #msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--g2)}
 .m{max-width:84%;padding:8px 11px;border-radius:12px;background:var(--card);align-self:flex-start;border:1px solid var(--line);white-space:pre-wrap}
 .m.me{align-self:flex-end;background:var(--me)}.m.err{border-color:var(--r)}.m.ok{border-color:var(--g)}
+.m.sys{align-self:center;max-width:94%;background:none;border:1px dashed var(--g);color:var(--g);font-size:13px;text-align:center}
 .m img{width:100%;border-radius:8px;display:block;margin-bottom:4px}.m small{display:block;color:var(--mut);font-size:12px}
-.ctl{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.ctl{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);flex-wrap:wrap}
 button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 14px}
-button.p{background:var(--g);color:#fff;border-color:var(--g)}
+button.p,button.on{background:var(--g);color:#fff;border-color:var(--g)}
 .pn{padding:16px;display:flex;flex-direction:column;gap:12px}.pn h2{font:700 17px Georgia,serif;margin:0}
-.row{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px}.row{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);align-items:center}
 .ok{color:var(--g)}.w,.mut{color:var(--mut);font-size:13px}
 .tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;background:#f9d7d2;color:#8a2217}
 .k{background:var(--g2);border-radius:10px;padding:10px}.k b{font:700 18px Georgia,serif;display:block}
+.th{width:64px;height:48px;object-fit:cover;border-radius:8px;margin-right:10px}.it{display:flex;align-items:center}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:6px}.f div{border:1px solid var(--g);border-radius:8px;padding:6px 8px;font-size:13px;background:var(--g2)}.f span{display:block;font-size:11px;color:var(--mut)}
 </style></head><body>
 <header><h1>Esteira <b>IMOB</b> · Demonstração</h1></header>
-<div class="note"><b>Demonstração roteirizada, sem IA e sem login.</b> Ela ilustra o fluxo do produto com uma conversa escrita à mão e documentos fictícios. No produto real, a IA conduz cada resposta e lê as imagens. Veja o vídeo e a documentação para o funcionamento completo.</div>
+<div class="note"><b>Demonstração roteirizada, sem IA e sem login.</b> Ela ilustra o fluxo com uma conversa escrita à mão e documentos e imóveis fictícios. No produto real, a IA conduz cada resposta, lê as imagens e usa o catálogo cadastrado pelo corretor. Veja o vídeo e a documentação para o funcionamento completo.</div>
 <main>
 <section class="card ph"><div class="top"><b>Marina · assistente virtual</b><small>Corretor(a) fictício(a) · CRECI-PE 12345</small></div>
 <div id="msgs"></div><div class="ctl"><button class="p" id="nx">Próximo passo</button><button id="au">Reproduzir tudo</button><button id="rs">Reiniciar</button></div></section>
-<section class="card pn" id="pn"></section>
+<section class="card pn"><div class="tabs"><button id="t1">Catálogo do corretor</button><button id="t2">Painel do lead</button></div><div id="pn"></div></section>
 </main>
 <script>
 const $=s=>document.querySelector(s);
-function img(kind){const c=document.createElement("canvas");c.width=640;c.height=400;const x=c.getContext("2d");
- if(kind==="foto"){const g=x.createLinearGradient(0,0,0,400);g.addColorStop(0,"#8fc7e8");g.addColorStop(1,"#f2d9b0");x.fillStyle=g;x.fillRect(0,0,640,400);x.fillStyle="#2f7f6b";x.fillRect(0,340,640,60);
-  ["#d9d2c3","#c7b9a0","#e8e1d3"].forEach((cl,k)=>{const h=150+k*50,px=60+k*190;x.fillStyle=cl;x.fillRect(px,340-h,120,h);x.fillStyle="#fff9";for(let r=0;r<h/30-1;r++)for(let q=0;q<4;q++)x.fillRect(px+10+q*26,350-h+r*30,14,18)});
-  x.fillStyle="#fff";x.font="14px sans-serif";x.fillText("ilustração · dados fictícios",12,388);return c.toDataURL()}
- x.fillStyle="#bfb8a8";x.fillRect(0,0,640,400);x.save();x.translate(40,30);x.rotate(.015);x.fillStyle="#f7f4ea";x.fillRect(0,0,560,330);x.fillStyle="#0b6b4a";x.fillRect(0,0,560,50);x.fillStyle="#fff";x.font="bold 18px sans-serif";
- x.fillText({cnh:"CARTEIRA NACIONAL DE HABILITAÇÃO",rg:"REPÚBLICA FEDERATIVA DO BRASIL · RG",hol:"HOLERITE · EMPRESA EXEMPLO LTDA",luz:"FATURA DE ENERGIA · NEOENERGIA"}[kind.split("-")[0]],16,32);
+function art(i){const c=document.createElement("canvas");c.width=640;c.height=400;const x=c.getContext("2d"),P=[["#9fd3f0","#f6e7c1"],["#f4c98b","#d8e8c9"],["#8fc7e8","#f2d9b0"],["#b9d7a8","#f3e3c3"],["#c8b6f0","#f6e0c8"]][i%5],g=x.createLinearGradient(0,0,0,400);g.addColorStop(0,P[0]);g.addColorStop(1,P[1]);x.fillStyle=g;x.fillRect(0,0,640,400);x.fillStyle="#2f7f6b";x.fillRect(0,340,640,60);
+ const cl=["#d9d2c3","#c7b9a0","#e8e1d3","#b8a88f"];for(let k=0;k<4;k++){const w=90+((k*37+i*23)%50),h=130+((k*61+i*47)%130),px=40+k*145;x.fillStyle=cl[(k+i)%4];x.fillRect(px,340-h,w,h);x.fillStyle="#fff9";for(let r=0;r<h/30-1;r++)for(let q=0;q<w/28;q++)x.fillRect(px+8+q*24,350-h+r*30,14,18)}
+ x.fillStyle="#fff";x.font="14px sans-serif";x.fillText("ilustração · dados fictícios",12,388);return c.toDataURL("image/jpeg",.7)}
+function dimg(kind){const c=document.createElement("canvas");c.width=640;c.height=400;const x=c.getContext("2d"),k=kind.split("-")[0];x.fillStyle="#bfb8a8";x.fillRect(0,0,640,400);x.save();x.translate(40,30);x.rotate(.015);x.fillStyle="#f7f4ea";x.fillRect(0,0,560,330);x.fillStyle="#0b6b4a";x.fillRect(0,0,560,50);x.fillStyle="#fff";x.font="bold 18px sans-serif";
+ x.fillText({cnh:"CARTEIRA NACIONAL DE HABILITAÇÃO",rg:"REPÚBLICA FEDERATIVA DO BRASIL · RG",hol:"HOLERITE · EMPRESA EXEMPLO LTDA",luz:"FATURA DE ENERGIA · NEOENERGIA"}[k],16,32);
  x.fillStyle="#9aa";x.fillRect(20,76,110,140);x.fillStyle="#222";x.font="19px sans-serif";x.fillText("Nome: João Silva",150,104);x.fillText("CPF: 123.456.789-00",150,140);
- x.fillText({cnh:"Validade 12/03/2026",rg:"Emitido em 2019","hol":"Salário líquido R$ 4.850,00",luz:"Venc. 10/10/2026 · Recife-PE"}[kind.split("-")[0]],150,176);x.fillText("DOCUMENTO FICTÍCIO",20,300);x.restore();
+ x.fillText({cnh:"Validade 12/03/2026",rg:"Emitido em 2019",hol:"Salário líquido R$ 4.850,00",luz:"Venc. 10/10/2026 · Recife-PE"}[k],150,176);x.fillText("DOCUMENTO FICTÍCIO",20,300);x.restore();
  if(kind.endsWith("blur")){const d=document.createElement("canvas");d.width=640;d.height=400;const y=d.getContext("2d");y.filter="blur(7px)";y.drawImage(c,0,0);return d.toDataURL()}return c.toDataURL("image/jpeg",.8)}
-const P0=()=>({lead:0,shown:0,docs:[]});let P=P0(),i=0,timer=null;
+const SEED=[["Apartamento 2 quartos em Boa Viagem","R$ 480.000","Boa Viagem"],["Casa 3 quartos nas Graças","R$ 890.000","Graças"],["Apartamento 1 quarto no Pina","R$ 310.000","Pina"],["Apartamento 3 quartos em Casa Forte","R$ 650.000","Casa Forte"]];
+const NEWP=["Apartamento 3 quartos em Piedade","R$ 540.000","Piedade","Perto da Praia de Piedade","3","Varanda, 2 vagas, lazer completo."];
+let CAT,P,i=0,timer=null;const IMG={};
+function init(){CAT=SEED.map((s,k)=>({t:s[0],p:s[1],b:s[2],i:k}));P={view:"cat",form:0,lead:0,shown:[],docs:[]}}
+function add(cls,t,src,sm){const d=document.createElement("div");d.className="m "+cls;if(src){const g=new Image();g.src=src;d.appendChild(g)}if(t){const s=document.createElement("span");s.textContent=t;d.appendChild(s)}if(sm){const s=document.createElement("small");s.textContent=sm;d.appendChild(s)}$("#msgs").appendChild(d);$("#msgs").scrollTop=1e9}
 const E=[
+{s:"Antes da conversa: o corretor define o nome do agente e já tem 4 imóveis no catálogo (painel ao lado).",v:"cat"},
+{s:"Ele cadastra um novo imóvel: título, preço, bairro, pontos de referência, descrição e foto.",f:1},
+{s:"O imóvel entra no catálogo, e a agente passa a usar esses dados nas conversas.",a:1},
+{s:"Agora, um cliente chega pelo anúncio do Instagram.",v:"lead"},
 {b:"Oi! Sou a Marina, assistente virtual do corretor. Vou te ajudar com a pré-análise do financiamento por aqui. Seus arquivos só serão vistos pelo corretor e pela análise de crédito e ficam guardados por até 30 dias. Posso seguir?"},
 {m:"Pode seguir."},
-{b:"Obrigada! Pra começar, qual é o seu nome completo e me conta um pouco sobre sua renda, ocupação e estado civil?"},
+{b:"Obrigada! Qual é o seu nome completo? E me conta um pouco sobre sua renda, ocupação e estado civil."},
 {m:"João Silva. Sou CLT, casado, a renda da família é uns 5 mil. Tenho 3 anos de FGTS, nome limpo e 20 mil de entrada.",u:()=>P.lead=1},
-{b:"Perfeito, João! Você já tem algum imóvel em mente?"},
+{s:"O cliente foge do assunto: a agente responde de verdade, sem roteiro."},
+{m:"Antes, você é um robô?"},
+{b:"Sou uma assistente virtual do corretor, sim. Eu organizo a conversa e os documentos, mas quem analisa e decide é ele e o banco."},
+{m:"Qual o juro de vocês?"},
+{b:"Não vou chutar número: a taxa depende do banco e da análise do seu perfil. O corretor confirma isso com você na análise."},
+{m:"Quanto tá o dólar hoje?"},
+{b:"Isso eu não sei te dizer 😅 Mas voltando: já anotei sua renda e entrada. Você já tem algum imóvel em mente?"},
+{s:"A agente só fala dos imóveis cadastrados: primeiro descreve, depois pergunta se o cliente quer a foto."},
 {m:"Tem algo perto do RioMar?"},
-{b:"Tenho um apartamento de 1 quarto no Pina, R$ 310.000, perto da Praia do Pina e do RioMar Shopping. Quer que eu te mande a foto?",u:()=>P.shown=1},
+{b:"Tenho um apartamento de 1 quarto no Pina, R$ 310.000, perto da Praia do Pina e do RioMar Shopping. Quer que eu mande a foto?",u:()=>P.shown.push("Apartamento 1 quarto no Pina")},
 {m:"Quero sim"},
-{card:1},
-{b:"Para a pré-análise, preciso de uma foto do seu RG ou CNH. Pode mandar!"},
+{card:2,t:"Apartamento 1 quarto no Pina · R$ 310.000"},
+{m:"E em Piedade, tem?"},
+{b:"Tem sim! Acabou de entrar: apartamento de 3 quartos em Piedade, R$ 540.000, perto da Praia de Piedade, com varanda e 2 vagas. Quer ver a foto?",u:()=>P.shown.push("Apartamento 3 quartos em Piedade")},
+{m:"Não precisa, obrigado."},
+{b:"Sem problema! Se quiser ver depois, é só pedir. Para a pré-análise, preciso de uma foto do seu RG ou CNH."},
 {d:"cnh",lab:"CNH enviada"},
 {b:"Essa CNH venceu em março de 2026. Consegue mandar a atual ou o seu RG?",c:"err"},
 {d:"rg-blur",lab:"RG enviado"},
@@ -66,17 +85,22 @@ const E=[
 {d:"hol",lab:"Holerite enviado",ok:["Comprovante de renda","02_Renda_JoaoSilva.jpg"]},
 {b:"Ótimo! Por último, um comprovante de residência dos últimos 90 dias.",c:"ok"},
 {d:"luz",lab:"Conta de luz enviada",ok:["Comprovante de residência","03_Residencia_JoaoSilva.jpg"]},
-{b:"Pronto, João! Recebi tudo e já montei seu dossiê para a análise. Te aviso aqui assim que tiver retorno. ✅",c:"ok"}];
-function add(cls,t,src,sm){const d=document.createElement("div");d.className="m "+cls;if(src){const g=new Image();g.src=src;d.appendChild(g)}if(t){const s=document.createElement("span");s.textContent=t;d.appendChild(s)}if(sm){const s=document.createElement("small");s.textContent=sm;d.appendChild(s)}$("#msgs").appendChild(d);$("#msgs").scrollTop=1e9}
-function pn(){const D=["RG ou CNH","Comprovante de renda","Comprovante de residência"];let h=`<h2>Painel do corretor</h2>`;
- if(!P.lead)h+=`<p class="mut">Nenhum lead ainda. Avance a conversa.</p>`;else h+=`<div><b>João Silva</b> <span class="tag">Quente</span></div><div class="mut">Renda: ~R$ 5 mil · CLT · casado · FGTS 3 anos · sem restrição · entrada R$ 20 mil</div>`;
- if(P.shown)h+=`<div class="mut"><b>Imóveis apresentados:</b> Apartamento 1 quarto no Pina</div>`;
- h+=`<div class="k"><span class="mut">Feedback por documento</span><b>segundos (hoje: cerca de 1 dia)</b></div><h2>Dossiê</h2>`;
- h+=D.map(n=>{const f=P.docs.find(x=>x[0]===n);return`<div class="row"><span>${n}</span><span class="${f?"ok":"w"}">${f?"✓ "+f[1]:"aguardando"}</span></div>`}).join("");$("#pn").innerHTML=h}
+{b:"Pronto, João! Recebi tudo e já montei seu dossiê para a análise. Te aviso aqui assim que tiver retorno. ✅",c:"ok"},
+{s:"O corretor recebe o lead qualificado, os imóveis de interesse e o dossiê pronto (painel ao lado).",v:"lead"}];
+function pn(){$("#t1").className=P.view==="cat"?"on":"";$("#t2").className=P.view==="lead"?"on":"";let h="";
+ if(P.view==="cat"){h+=`<h2>Perfil e catálogo do corretor</h2><div class="mut">Agente: <b>Marina</b> · Corretor(a): fictício(a) · CRECI-PE 12345</div><h2>Meus imóveis (${CAT.length})</h2>`+CAT.map(c=>{IMG[c.i]=IMG[c.i]||art(c.i);return`<div class="row"><span class="it"><img class="th" src="${IMG[c.i]}"><span><b>${c.t}</b><br><span class="mut">${c.p} · ${c.b}</span></span></span></div>`}).join("");
+  if(P.form)h+=`<h2>Adicionar imóvel</h2><div class="f"><div><span>Título</span>${NEWP[0]}</div><div><span>Preço</span>${NEWP[1]}</div><div><span>Bairro</span>${NEWP[2]}</div><div><span>Pontos de referência</span>${NEWP[3]}</div><div><span>Quartos</span>${NEWP[4]}</div><div><span>Foto</span>piedade.jpg ✓</div></div>`}
+ else{h+=`<h2>Painel do lead</h2>`;if(!P.lead)h+=`<p class="mut">Nenhum lead ainda. Avance a conversa.</p>`;else h+=`<div><b>João Silva</b> <span class="tag">Quente</span></div><div class="mut">Renda ~R$ 5 mil · CLT · casado · FGTS 3 anos · sem restrição · entrada R$ 20 mil · origem: Instagram</div>`;
+  if(P.shown.length)h+=`<div class="mut"><b>Imóveis apresentados:</b> ${P.shown.join(" · ")}</div>`;
+  h+=`<div class="k"><span class="mut">Feedback por documento</span><b>segundos (hoje: cerca de 1 dia)</b></div><h2>Dossiê</h2>`+["RG ou CNH","Comprovante de renda","Comprovante de residência"].map(n=>{const f=P.docs.find(x=>x[0]===n);return`<div class="row"><span>${n}</span><span class="${f?"ok":"w"}">${f?"✓ "+f[1]:"aguardando"}</span></div>`}).join("")}
+ $("#pn").innerHTML=h}
 function step(){if(i>=E.length){stop();return}const e=E[i++];
- if(e.b)add(e.c||"",e.b);if(e.m)add("me",e.m);if(e.card)add("","",img("foto"),"Apartamento 1 quarto no Pina · R$ 310.000");if(e.d)add("me","",img(e.d),e.lab);if(e.ok)P.docs.push(e.ok);if(e.u)e.u();pn()}
+ if(e.s)add("sys",e.s);if(e.v)P.view=e.v;if(e.f){P.view="cat";P.form=1}if(e.a){P.view="cat";P.form=0;CAT.push({t:NEWP[0],p:NEWP[1],b:NEWP[2],i:4})}
+ if(e.b)add(e.c||"",e.b);if(e.m)add("me",e.m);if(e.card!=null)add("","",art(e.card),e.t);if(e.d)add("me","",dimg(e.d),e.lab);
+ if(e.ok){P.docs.push(e.ok);P.view="lead"}if(e.u){e.u();P.view="lead"}pn()}
 function stop(){clearInterval(timer);timer=null;$("#au").textContent="Reproduzir tudo"}
-$("#nx").onclick=step;$("#au").onclick=()=>{if(timer){stop();return}$("#au").textContent="Pausar";step();timer=setInterval(step,1900)};
-$("#rs").onclick=()=>{stop();i=0;P=P0();$("#msgs").innerHTML="";pn()};
-pn();
+$("#nx").onclick=step;$("#au").onclick=()=>{if(timer){stop();return}$("#au").textContent="Pausar";step();timer=setInterval(step,2000)};
+$("#rs").onclick=()=>{stop();i=0;init();$("#msgs").innerHTML="";pn()};
+$("#t1").onclick=()=>{P.view="cat";pn()};$("#t2").onclick=()=>{P.view="lead";pn()};
+init();pn();
 </script></body></html>
