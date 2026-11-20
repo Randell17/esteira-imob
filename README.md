@@ -33,6 +33,7 @@ O arquivo `esteira-imob.html` chama a IA por um recurso que **só existe dentro 
 
 - assista ao **vídeo da demonstração**:https://youtu.be/AcgGvJJGDoQ?si=Ny67htA9scKHmpQO;
 - ou abra o **link publicado** (requer conta no Claude): https://claude.ai/artifact/GQohDQaNKGn4654hFQHbsK
+- Demonstração navegável (roteirizada, sem login): https://randell17.github.io/esteira-imob/demo.html
 
 Para rodar fora do Claude, seria necessário um pequeno servidor que chame a API da Anthropic com uma chave protegida. Isso está no roadmap.
 
